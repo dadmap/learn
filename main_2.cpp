@@ -7,7 +7,7 @@ using namespace std;
 
 const int nmax = 100;
 bool ArrayInput(int* n, double x[], char* fname);
-double Sum(double x[], int n, double d1, double d2);
+double Sum(double x[], int n, double d1, double d2, int *cnt);
 void PrintArray(const char* name, double x[], int n);
 int main(int argc, char* argv[]) {
     double a[nmax], b[nmax], c[nmax];
@@ -38,19 +38,33 @@ int main(int argc, char* argv[]) {
 
     cout << "Введите верхнюю границу диапазона, большую нижней: ";
     cin >> d2;
-
-    suma = Sum(a, na, d1, d2);
-    sumb = Sum(b, nb, d1, d2);
-    sumc = Sum(c, nc, d1, d2);
+    int ca =0, cb = 0, cc=0;
+    suma = Sum(a, na, d1, d2, &ca);
+    sumb = Sum(b, nb, d1, d2, &cb);
+    sumc = Sum(c, nc, d1, d2, &cc);
     if (d1>d2) {
         printf("Не корректно введены границы ");
     }
     else{
-    cout << "\n--- Результаты ---\n";
-    cout << "Сумма массива A: " << suma << endl;
-    cout << "Сумма массива B: " << sumb << endl;
-    cout << "Сумма массива C: " << sumc << endl;
-
+ cout << "\n--- Результаты ---\n";
+    if (ca==0){
+        cout << "В массиве А нет элементов попадающих в диапазон" <<endl;
+    }
+    else{
+         cout << "Сумма массива A: " << suma << endl;
+    }
+    if (cb==0){
+         cout << "В массиве B нет элементов попадающих в диапазон" <<endl;
+    }
+    else{
+        cout << "Сумма массива B: " << sumb << endl;
+    }
+    if (cc==0){
+        cout << "В массиве C нет элементов попадающих в диапазон" <<endl;
+    }
+    else{
+        cout << "Сумма массива C: " << sumc << endl;
+    }
     maxsum = suma;
     if (sumb > maxsum) maxsum = sumb;
     if (sumc > maxsum) maxsum = sumc;
@@ -113,11 +127,13 @@ bool ArrayInput(int* n, double x[], char* fname) {
     return true;
 }
 
-double Sum(double x[], int n, double d1, double d2) {
+double Sum(double x[], int n, double d1, double d2, int* cnt) {
+    *cnt = 0;
     double s = 0;
     for (int i = 0; i < n; i++) {
         if (x[i] >= d1 && x[i] <= d2) {
             s += x[i];
+            (*cnt)++;
         }
     }
     return s;
