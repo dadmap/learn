@@ -33,13 +33,15 @@ int ArrayInput(int* n, double x[], char* fname) {
     return 1;
 }
 
-double Sum(double x[], int n, double d1, double d2,int* cnt) {
-    *cnt =0;
+double Sum(double x[], int n, double d1, double d2, int* cnt) {
+    *cnt = 0;
     double s = 0;
-    for (int i = 0; i < n; i++)
-        if (x[i] >= d1 && x[i] <= d2)
+    for (int i = 0; i < n; i++) {
+        if (x[i] >= d1 && x[i] <= d2) {
             s += x[i];
             (*cnt)++;
+        }
+    }
     return s;
 }
 
@@ -88,25 +90,25 @@ int main(int argc, char* argv[]) {
     }
     else{
     
-    printf("\n--- Результаты ---\n");
-    if (ca!=0) {
-    printf("Сумма массива A: %.3lf\n", suma);
+       printf("\n--- Результаты ---\n");
+    if (ca==0){
+        printf("В массиве А нет элементов попадающих в диапазон\n");
     }
     else{
-    printf("элементы A не попадают в диапазон");}
-    if (cb!=0) {
-    printf("Сумма массива B: %.3lf\n", sumb); 
+        printf("Сумма массива A: %.3lf\n",suma);
+    }
+    if (cb==0){
+        printf("В массиве B нет элементов попадающих в диапазон\n");
     }
     else{
-    printf("элементы B не попадают в диапазон");
+        printf("Сумма массива B: %.3lf\n",sumb);
     }
-    if (cc!=0){
-    printf("Сумма массива C: %.3lf\n", sumc);
+    if (cc==0){
+        printf("В массиве C нет элементов попадающих в диапазон\n");
     }
     else{
-    printf("элементы C не попадают в диапазон");
+        printf("Сумма массива C: %.3lf\n",sumc);
     }
-    
 
     maxsum = suma;
     if (sumb > maxsum) maxsum = sumb;
